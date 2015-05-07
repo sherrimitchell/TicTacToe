@@ -27,12 +27,13 @@ word_list = ["cookies", "kittens", "fairies",
 turn_count = 7
 guesses = Set.new
 
+# Provide input validation to check for blank input
 def intermediate_word(answer, guesses)
-  #answer.each_char { |l| guesses.include?(l) ? print l : print "-" }
   answer.each_char do |letter|
-    #guesses.include?(letter) ? print letter : print "-"
     if guesses.include?(letter)
       print letter
+    elsif guesses.empty?
+      puts "You must enter a letter."
     else
       print "-"
     end
@@ -45,7 +46,27 @@ def word_complete?(word, guessed_letters)
 end
 
 # Tell the user the partially completed word
-def partial_word(answer, guessed_letters)
+def partial_word(answer, guesses)
+  answer.each_char do |letter|
+    if guesses.include?(letter)
+    print letter.each.to_set
+    else
+      print "-"
+    end
+  end
+  puts
+end
+
+# Provide number of remaining turns to user
+# def remaining_turns(answer, turns)
+#   turns == 7
+#   answer.each_char do |letter|
+#     if guesses.include?(letter)
+#       puts "You must enter a letter."
+#       else
+
+
+## Provide a game over state that that displays whether the user won or lost and returns the word that they were trying to guess
 
 # Include Pry in the program where you want to debug
 binding.pry
