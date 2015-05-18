@@ -1,7 +1,7 @@
 class Human
   def initialize(name)
     @name = name
-    @alertness= 0.00
+    @alertness= 0.00sherri.alertness
   end
   def alertness
     @alertness

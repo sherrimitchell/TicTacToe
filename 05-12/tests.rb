@@ -4,13 +4,13 @@ require './human'
 require './coffee'
 
 ## This assignment made more sense when I wrote it in the morning.
-class CaffeineTest < MiniTest::Test
+class CaffeineTest < MiniTest::Test     # Your test sutie
   def test_humans_tend_to_be_sleepy
     tyler = Human.new "Tyler"
     assert tyler.alertness < 0.1
   end
 
-  def test_humans_need_coffee
+  def test_humans_need_coffee   # Each of these are tests for specific specific things about your code
     randy = Human.new "Randy"
     refute randy.has_coffee?
     assert randy.needs_coffee?

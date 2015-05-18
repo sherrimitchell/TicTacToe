@@ -15,7 +15,7 @@
 
 # binding.pry
 
-board = ["b1", "b2", "b3","b4", "b5", "b6", "b7", "b8", "b9"]
+# board = ["b1", "b2", "b3","b4", "b5", "b6", "b7", "b8", "b9"]
 
   def display_board(board)
     puts " #{board[0]} | #{board[1]} | #{board[2]} "
