@@ -1,15 +1,16 @@
 require './board.rb'
+## I want to find a method to randomly pick 'X' or 'O' for a player
+class Player
 
-class Human
+  attr_accessor :letter
 
-    def player_move(board)
-      Board.to_s
+    def choose_move(board)  #change to choose move
       puts """
       Where would you like to move? 
       Please enter the number of the square: 
       """
       square = gets.chomp
-      available = board.select { |x| x.is_a? Fixnum }
+      available = board.available_moves
       until square =~ /^#{available}$/
         puts """
         Sorry. Not a valid square. 
@@ -17,6 +18,6 @@ class Human
         """
         square = gets.chomp
       end
-      square.to_i - 1
+      square.to_i
     end
   end

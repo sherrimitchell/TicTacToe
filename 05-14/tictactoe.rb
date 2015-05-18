@@ -12,19 +12,81 @@
 ## The next player's turn starts after the previous player has entered their letter into a space.
 ## The game ends when one player wins or there is a draw
 
-require './board'
+# require 'pry'
 
-def tic_tac_toe
-  board = board.new
-  # current_player = get_entry
-  # until game_over?(board)
-  #   puts "Next player. Make a move. '#{current_player}'!"
-  #   move = player_move(board)
-  #   board[move] = current_player
-  #   current_player = current_player == 'X' ? 'O' : 'X'
+# binding.pry
+
+require './board'
+require './player'
+# require './game'
+
+class Tictactoe
+
+  def initialize
+    @board = Board.new
+    puts "Player 1"
+    @player1 = Player.new
+    puts "Player 2"
+    @player2 = Player.new 
+    @letter = get_letter 
+  end
+
+  def play
+    current_player = @player1
+    until game_over?
+      turn(current_player)
+      if current_player == @player1
+        current_player = @player2
+      else
+        current_player = @player1
+      end
+    end
+    @board.display
+    puts "Game Over!"
+  end
+
+  def turn(player)
+    @board.display
+    index = player.choose_move(@board)
+    letter = player.letter
+    @board.add_move(index, letter)
+  end
+
+  def get_letter
+    puts """
+    Welcome to Tic Tac Toe.
+    Please enter an X or O:
+    """
+    letter = gets.chomp
+    until letter =~ /^[xo]$/i
+      puts """
+      Sorry. Invalid entry. 
+      You must enter an X or an O: 
+      """
+    letter = gets.chomp
+    end
+    letter.upcase
+    @player1.letter = letter.upcase
+    @player1.letter == 'X' ? @player2.letter = 'O' : @player2.letter = 'X'
+  end
+
+  # def tic_tac_toe
+  #   current_player = @letter == @player1.letter ? @player1 : @player2
+  #   until game_over?
+  #     puts "Next player. Make a move. '#{current_player}'!"
+  #     move = current_player.choose_move(board)
+  #     board[move] = current_player
+  #     current_player = current_player == @player1 ? @player2 : @player1
+  #   end
+  #   puts "Game Over!"
+  #   @board.display
   # end
-  # puts "Game Over!"
-  display_board(board)
+
+  def game_over?
+    @board.win? || @board.draw?
+  end
+
+  
 end
 
-# tic_tac_toe
+
